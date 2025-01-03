@@ -1,14 +1,18 @@
 import React from 'react'
 import { BsFillPersonFill } from "react-icons/bs";
 import { FaGrinHearts, FaShoppingBag } from "react-icons/fa";
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 
 const Header = () => {
+  const bag = useSelector(store => store.bag)
+  console.log("bag contains", bag)
   return (
     <header>
       <div className="logo_container">
-        <a href="#"><img className="myntra_home" src="images/myntra_logo.webp" alt="Myntra Home" /></a>
+        <Link to="/"><img className="myntra_home" src="images/myntra_logo.webp" alt="Myntra Home" /></Link>
       </div>
       <nav className="nav_bar">
         <a href="#">Men</a>
@@ -34,12 +38,12 @@ const Header = () => {
           <span className="action_name">Wishlist</span>
         </div>
 
-        <a className="action_container" href="pages/bag.html">
+        <Link className="action_container" to="/bag">
           <FaShoppingBag />
 
           <span className="action_name">Bag</span>
-          <span className="bag-item-count">0</span>
-        </a>
+          <span className="bag-item-count">{bag.length}</span>
+        </Link>
       </div>
     </header>
   )

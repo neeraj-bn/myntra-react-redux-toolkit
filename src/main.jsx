@@ -1,8 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
-import {RouterProvider} from 'react-router-dom'
+
+import App from './components/routes/App.jsx'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Home from './components/routes/Home.jsx'
+import Bag from './components/routes/Bag.jsx'
+import { Provider } from "react-redux"
+import myntraStore from './store/index.js'
+import "bootstrap/dist/css/bootstrap.min.css"
 
 
 const router = createBrowserRouter([
@@ -10,11 +16,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <PostList />, loader: postLoader },
+      { path: "/", element: <Home /> },
       {
-        path: "/create-post",
-        element: <CreatePost />,
-        action: createPostAction,
+        path: "/bag",
+        element: <Bag />,
+        // action: createPostAction,
       },
     ],
   },
@@ -23,6 +29,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <RouterProvider router={router}/>
+    <Provider store={myntraStore}>
+      <RouterProvider router={router} /></Provider>
   </StrictMode>,
 )
